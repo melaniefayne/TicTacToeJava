@@ -12,7 +12,7 @@ This project is a graphical implementation of the classic Tic-Tac-Toe game using
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/tictactoe-java-swing.git
+   git clone git@github.com:melaniefayne/TicTacToeJava.git
 
 ## GUI
 
