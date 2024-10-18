@@ -11,16 +11,21 @@ public class TicTacToeMain {
 
         while (game.notDone()) {
             char currentPlayer = game.getNextPlayerChar();
-            System.out.println("Player " + currentPlayer + ", enter your move (row and column):");
+            System.out.println("Player " + currentPlayer + ", enter your move as a two-digit number (e.g., 11 for top-left):");
 
-            int row = scanner.nextInt();
-            int column = scanner.nextInt();
+            // Read the move as an integer, like 11, 23, etc.
+            int move = scanner.nextInt();
 
-            // Attempt to place the player's mark and re-prompt if the move is invalid
-            while (!game.choose(row, column)) {
-                System.out.println("Invalid move. Please try again.");
-                row = scanner.nextInt();
-                column = scanner.nextInt();
+            // Extract row and column from the two-digit number
+            int row = move / 10 - 1; // first digit as row (1-based, convert to 0-based)
+            int column = move % 10 - 1; // second digit as column (1-based, convert to 0-based)
+
+            // Validate that the input is within the correct range
+            while (row < 0 || row > 2 || column < 0 || column > 2 || !game.choose(row, column)) {
+                System.out.println("Invalid move. Please enter a valid two-digit number between 11 and 33 that is not already taken.");
+                move = scanner.nextInt();
+                row = move / 10 - 1;  // Recalculate row
+                column = move % 10 - 1;  // Recalculate column
             }
 
             // Display the board after the move
