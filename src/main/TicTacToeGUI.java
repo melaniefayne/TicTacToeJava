@@ -1,10 +1,12 @@
+package main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TicTacToeGUI extends JFrame implements ActionListener {
-    private TicTacToe game;  // TicTacToe game logic
+    private TicTacToe game;  // game.TicTacToe game logic
     private final JButton[][] buttons;  // Buttons for the 3x3 grid
     private final JLabel statusLabel;  // Label to show game status (winner/tie/ongoing)
     private final JLabel scoreLabelX, scoreLabelO, scoreLabelTie;  // Labels for scoreboard
@@ -84,17 +86,17 @@ public class TicTacToeGUI extends JFrame implements ActionListener {
 
         // If the move is valid, update the game board and button text
         if (game.choose(row, col)) {
-            clickedButton.setText(String.valueOf(game.getNextPlayerChar() == 'X' ? 'O' : 'X'));  // Show the previous player's mark
+            clickedButton.setText(String.valueOf(game.getCurrentPlayer() == Player.X ? Player.O : Player.X));  // Show the previous player's mark
             clickedButton.setEnabled(false);  // Disable the button after it's clicked
 
             // Check if the game has ended
-            if (game.didWin('X')) {
+            if (game.didWin(Player.X)) {
                 statusLabel.setText("Player X wins!");
-                xWins++;  // Increment X's score
+                xWins++;  // Increment M's score
                 scoreLabelX.setText("Player X: " + xWins);  // Update scoreboard
                 disableAllButtons();
                 replayButton.setEnabled(true);  // Enable replay
-            } else if (game.didWin('O')) {
+            } else if (game.didWin(Player.O)) {
                 statusLabel.setText("Player O wins!");
                 oWins++;  // Increment O's score
                 scoreLabelO.setText("Player O: " + oWins);  // Update scoreboard
@@ -108,7 +110,7 @@ public class TicTacToeGUI extends JFrame implements ActionListener {
                 replayButton.setEnabled(true);  // Enable replay
             } else {
                 // Update the status label for the next player
-                statusLabel.setText("Player " + game.getNextPlayerChar() + "'s turn");
+                statusLabel.setText("Player " + game.getCurrentPlayer() + "'s turn");
             }
         }
     }

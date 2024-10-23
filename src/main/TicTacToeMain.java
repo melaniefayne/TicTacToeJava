@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Scanner;
 
 public class TicTacToeMain {
@@ -18,7 +20,7 @@ public class TicTacToeMain {
 
             // Play the game
             while (game.notDone()) {
-                char currentPlayer = game.getNextPlayerChar();
+                Player currentPlayer = game.getCurrentPlayer();
                 System.out.println("Player " + currentPlayer + ", enter your move as a two-digit number (e.g., 11 for top-left):");
 
                 // Read the move as an integer, like 11, 23, etc.
@@ -40,11 +42,11 @@ public class TicTacToeMain {
                 System.out.println(game);
 
                 // Check if the game has ended
-                if (game.didWin('X')) {
+                if (game.didWin(Player.X)) {
                     System.out.println("Player X wins!");
-                    xWins++; // Increment X's score
+                    xWins++; // Increment M's score
                     break;
-                } else if (game.didWin('O')) {
+                } else if (game.didWin(Player.O)) {
                     System.out.println("Player O wins!");
                     oWins++; // Increment O's score
                     break;
